@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" d:Height="450" d:Width="600" SizeToContent="WidthAndHeight">
+        Title="MainWindow" d:Height="550" d:Width="700" SizeToContent="WidthAndHeight">
     <StackPanel Orientation="Horizontal" Margin="10">
-        <DataGrid Width="500" Height="300" x:Name="grid" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=5}"
-                  SelectionUnit="Cell" CanUserAddRows="False" SelectedCellsChanged="grid_SelectedCellsChanged" MouseUp="grid_MouseUp">
+        <DataGrid Width="500" Height="400" x:Name="grid" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=5}"
+                  SelectionUnit="Cell" CanUserAddRows="False" SelectedCellsChanged="grid_SelectedCellsChanged" MouseUp="grid_MouseUp"
+                  HeadersVisibility="None">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
-                    <Setter Property="Height" Value="50"/>
-                    <Setter Property="Width" Value="60"/>
+                    <Setter Property="Height" Value="70"/>
+                    <Setter Property="Width" Value="80"/>
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="Transparent" />
@@ -33,13 +34,15 @@
                                 <Rectangle>
                                     <Rectangle.Style>
                                         <Style TargetType="Rectangle">
+                                            <Setter Property="Fill" Value="Transparent"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding v1Selected}" Value="true">
                                                     <Setter Property="Fill" Value="Orange"/>
                                                     <Setter Property="Opacity" Value="0.3"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding v1Selected}" Value="false">
-                                                    <Setter Property="Fill" Value="Transparent"/>
+                                                <DataTrigger Binding="{Binding v1Selecting}" Value="true">
+                                                    <Setter Property="Fill" Value="Orange"/>
+                                                    <Setter Property="Opacity" Value="0.3"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -49,6 +52,7 @@
                                     <TextBlock Text="00" Foreground="Black"/>
                                     <CheckBox IsChecked="{Binding v1}" Content="設定" IsHitTestVisible="False"/>
                                     <CheckBox IsChecked="{Binding v1Selected}" Content="選択" IsHitTestVisible="False"/>
+                                    <CheckBox IsChecked="{Binding v1Selecting}" Content="選択候補" IsHitTestVisible="False"/>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -61,13 +65,15 @@
                                 <Rectangle>
                                     <Rectangle.Style>
                                         <Style TargetType="Rectangle">
+                                            <Setter Property="Fill" Value="Transparent"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding v2Selected}" Value="true">
                                                     <Setter Property="Fill" Value="Orange"/>
                                                     <Setter Property="Opacity" Value="0.3"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding v2Selected}" Value="false">
-                                                    <Setter Property="Fill" Value="Transparent"/>
+                                                <DataTrigger Binding="{Binding v2Selecting}" Value="true">
+                                                    <Setter Property="Fill" Value="Orange"/>
+                                                    <Setter Property="Opacity" Value="0.3"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -77,6 +83,7 @@
                                     <TextBlock Text="00" Foreground="Black"/>
                                     <CheckBox IsChecked="{Binding v2}" Content="設定" IsHitTestVisible="False"/>
                                     <CheckBox IsChecked="{Binding v2Selected}" Content="選択" IsHitTestVisible="False" d:IsChecked="False"/>
+                                    <CheckBox IsChecked="{Binding v2Selecting}" Content="選択候補" IsHitTestVisible="False" d:IsChecked="False"/>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -89,13 +96,15 @@
                                 <Rectangle>
                                     <Rectangle.Style>
                                         <Style TargetType="Rectangle">
+                                            <Setter Property="Fill" Value="Transparent"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding v3Selected}" Value="true">
                                                     <Setter Property="Fill" Value="Orange"/>
                                                     <Setter Property="Opacity" Value="0.3"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding v3Selected}" Value="false">
-                                                    <Setter Property="Fill" Value="Transparent"/>
+                                                <DataTrigger Binding="{Binding v3Selecting}" Value="true">
+                                                    <Setter Property="Fill" Value="Orange"/>
+                                                    <Setter Property="Opacity" Value="0.3"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -105,6 +114,7 @@
                                     <TextBlock Text="00" Foreground="Black"/>
                                     <CheckBox IsChecked="{Binding v3}" Content="設定" IsHitTestVisible="False"/>
                                     <CheckBox IsChecked="{Binding v3Selected}" Content="選択" IsHitTestVisible="False"/>
+                                    <CheckBox IsChecked="{Binding v3Selecting}" Content="選択候補" IsHitTestVisible="False"/>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>

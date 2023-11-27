@@ -69,22 +69,13 @@ namespace WpfApp1
 
         private void grid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            if (grid.SelectedCells.Count == 1)
-            {
-                return;
-            }
-            else
-            {
-                foreach (var cellInfo in grid.SelectedCells)
-                {
-                    var detail = cellInfo.Item as Detail;
-                    detail?.SelectForce(cellInfo.Column.DisplayIndex);
-                }
+            DeleteAllSelecting();
 
-                grid.UnselectAllCells();
+            foreach (var cellInfo in grid.SelectedCells)
+            {
+                var detail = cellInfo.Item as Detail;
+                detail?.SetSelecting(cellInfo.Column.DisplayIndex);
             }
-
-            grid.UpdateLayout();
         }
 
         private void UnSelectAll()
@@ -102,8 +93,28 @@ namespace WpfApp1
                 var detail = grid.SelectedCells[0].Item as Detail;
                 detail?.SwitchSelected(grid.SelectedCells[0].Column.DisplayIndex);
             }
+            else
+            {
+                foreach (var cellInfo in grid.SelectedCells)
+                {
+                    var detail = cellInfo.Item as Detail;
+                    detail?.SelectForce(cellInfo.Column.DisplayIndex);
+                }
+            }
+
+            DeleteAllSelecting();
 
             grid.UnselectAllCells();
+
+            grid.UpdateLayout();
+        }
+
+        private void DeleteAllSelecting()
+        {
+            foreach (var detail in Details)
+            {
+                detail.DeleteAllSelecting();
+            }
         }
     }
 
@@ -137,6 +148,22 @@ namespace WpfApp1
                 if (_v1Selected == value)
                     return;
                 _v1Selected = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        private bool _v1Selecting;
+
+        public bool v1Selecting
+        {
+            get
+            { return _v1Selecting; }
+            set
+            {
+                if (_v1Selecting == value)
+                    return;
+                _v1Selecting = value;
                 RaisePropertyChanged();
             }
         }
@@ -175,6 +202,22 @@ namespace WpfApp1
             }
         }
 
+
+        private bool _v2Selecting;
+
+        public bool v2Selecting
+        {
+            get
+            { return _v2Selecting; }
+            set
+            {
+                if (_v2Selecting == value)
+                    return;
+                _v2Selecting = value;
+                RaisePropertyChanged();
+            }
+        }
+
         #endregion
 
         #region v3
@@ -205,6 +248,22 @@ namespace WpfApp1
                 if (_v3Selected == value)
                     return;
                 _v3Selected = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        private bool _v3Selecting;
+
+        public bool v3Selecting
+        {
+            get
+            { return _v3Selecting; }
+            set
+            {
+                if (_v3Selecting == value)
+                    return;
+                _v3Selecting = value;
                 RaisePropertyChanged();
             }
         }
@@ -273,6 +332,32 @@ namespace WpfApp1
                 default:
                     throw new ArgumentException("", nameof(index));
             }
+        }
+
+        public void SetSelecting(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    v1Selecting = true;
+                    break;
+                case 1:
+                    v2Selecting = true;
+                    break;
+                case 2:
+                    v3Selecting = true;
+                    break;
+
+                default:
+                    throw new ArgumentException("", nameof(index));
+            }
+        }
+
+        public void DeleteAllSelecting()
+        {
+            v1Selecting = false;
+            v2Selecting = false;
+            v3Selecting = false;
         }
 
         void RaisePropertyChanged([CallerMemberName] string propName = "")
